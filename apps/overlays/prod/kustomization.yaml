@@ -5,8 +5,8 @@ namespace: prod
 
 resources:
   - namespace.yaml
-  - ../../base/app1
-  - ../../base/app2
+  - ../../base/servicetest
+  - ../../base/jotterwebsite
 
 commonLabels:
   env: prod
@@ -14,14 +14,14 @@ commonLabels:
 patches:
   - target:
       kind: Deployment
-      name: app1
+      name: servicetest
     patch: |-
       - op: replace
         path: /spec/replicas
         value: 2
   - target:
       kind: Deployment
-      name: app2
+      name: jotterwebsite
     patch: |-
       - op: replace
         path: /spec/replicas

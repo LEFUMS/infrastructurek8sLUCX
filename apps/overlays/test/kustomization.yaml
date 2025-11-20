@@ -5,8 +5,8 @@ namespace: test
 
 resources:
   - namespace.yaml
-  - ../../base/app1
-  - ../../base/app2
+  - ../../base/servicetest
+  - ../../base/jotterwebsite
 
 commonLabels:
   env: test

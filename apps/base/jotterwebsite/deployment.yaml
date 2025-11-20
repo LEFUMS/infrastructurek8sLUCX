@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app1
+  name: jotterwebsite
   labels:
-    app: app1
+    app: jotterwebsite
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: app1
+      app: jotterwebsite
   template:
     metadata:
       labels:
-        app: app1
+        app: jotterwebsite
     spec:
       containers:
-        - name: nginx
-          image: nginx:1.25.3
+        - name: podinfo
+          image: ghcr.io/stefanprodan/podinfo:6.5.4
           ports:
-            - containerPort: 80
+            - containerPort: 9898
           resources:
             limits:
               memory: "128Mi"
