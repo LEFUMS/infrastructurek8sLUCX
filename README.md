@@ -1,6 +1,6 @@
 # GitOps Repository for Azure Kubernetes Clusters
 
-This repository uses FluxCD and Kustomize to manage deployments for the `servicetest` and `jotterwebsite` applications across two clusters: `testing` and `official`.
+This repository uses FluxCD and Kustomize to manage deployments for the `servicetest` and `jotterwebsite` applications across Dev, Staging, and Prod environments.
 
 ## Structure
 
@@ -10,9 +10,9 @@ This repository uses FluxCD and Kustomize to manage deployments for the `service
 │   │   ├── servicetest/   # Helm-based application (Chart in ACR)
 │   │   └── jotterwebsite/ # Manifest-based application (Image in ACR)
 │   └── overlays/          # Environment variations
-│       ├── dev/           # Development environment (Testing Cluster)
-│       ├── test/          # Test environment (Testing Cluster)
-│       └── prod/          # Production environment (Official Cluster)
+│       ├── dev/           # Development environment
+│       ├── staging/          # Test environment
+│       └── prod/          # Production environment (High Availability)
 ├── clusters/
 │   ├── testing/           # Configuration for the Testing Cluster
 │   └── official/          # Configuration for the Official Cluster
@@ -26,11 +26,9 @@ This repository uses FluxCD and Kustomize to manage deployments for the `service
 
 ## Clusters & Environments
 
-*   **Testing Cluster**:
-    *   **Dev**: `dev` namespace.
-    *   **Test**: `test` namespace.
-*   **Official Cluster**:
-    *   **Prod**: `prod` namespace (High Availability).
+*   **Dev**: Deploys to `dev` namespace.
+*   **Staging**: Deploys to `staging` namespace.
+*   **Prod**: Deploys to `prod` namespace with increased replica count (2 replicas).
 
 ## Azure Integration
 
