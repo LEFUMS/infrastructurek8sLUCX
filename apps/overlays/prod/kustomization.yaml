@@ -13,11 +13,11 @@ commonLabels:
 
 patches:
   - target:
-      kind: Deployment
+      kind: HelmRelease
       name: servicetest
     patch: |-
       - op: replace
-        path: /spec/replicas
+        path: /spec/values/replicaCount
         value: 2
   - target:
       kind: Deployment

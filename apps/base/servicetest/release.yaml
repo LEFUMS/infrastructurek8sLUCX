@@ -1,0 +1,33 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: servicetest
+spec:
+  interval: 10m
+  chart:
+    spec:
+      chart: servicetest
+      version: "*"
+      sourceRef:
+        kind: HelmRepository
+        name: servicetest
+      interval: 10m
+  values:
+    replicaCount: 1
+    image:
+      repository: myregistry.azurecr.io/servicetest
+      pullPolicy: IfNotPresent
+    imagePullSecrets:
+      - name: acr-secret-servicetest
+    # Assuming standard chart structure supports these or extraVolumes/extraVolumeMounts
+    volumes:
+      - name: secrets-store-inline
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: "azure-kvname-acr-servicetest"
+    volumeMounts:
+      - name: secrets-store-inline
+        mountPath: "/mnt/secrets-store"
+        readOnly: true
